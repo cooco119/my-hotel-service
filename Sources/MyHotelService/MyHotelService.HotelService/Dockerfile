@@ -1,19 +1,13 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
-WORKDIR /app
-EXPOSE 80
-
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["HotelService/HotelService.csproj", "HotelService/"]
-RUN dotnet restore "HotelService/HotelService.csproj"
+COPY ["MyHotelService.Common/MyHotelService.Common.csproj", "MyHotelService.Common/"]
+RUN dotnet restore "MyHotelService.Common/MyHotelService.Common.csproj"
+COPY ["MyHotelService.HotelService/MyHotelService.HotelService.csproj", "MyHotelService.HotelService/"]
+RUN dotnet restore "MyHotelService.HotelService/MyHotelService.HotelService.csproj"
 COPY . .
-WORKDIR "/src/HotelService"
-RUN dotnet build "HotelService.csproj" -c Release -o /app
-
-FROM build AS publish
-RUN dotnet publish "HotelService.csproj" -c Release -o /app
-
-FROM base AS final
+WORKDIR "/src/MyHotelService.HotelService"
+RUN dotnet build "MyHotelService.HotelService.csproj" -c Release -o /app
+EXPOSE 5002
+RUN dotnet publish "MyHotelService.HotelService.csproj" -c Release -o /app
 WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "HotelService.dll"]
+ENTRYPOINT ["dotnet", "MyHotelService.HotelService.dll"]

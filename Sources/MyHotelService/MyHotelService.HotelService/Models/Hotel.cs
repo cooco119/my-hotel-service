@@ -2,32 +2,42 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using MyHotelService.HotelService.Enums;
+using MongoDB.Bson;
+using MyHotelService.Common.HotelService.Enums;
+using MyHotelService.Common.HotelService.Models;
 using Newtonsoft.Json;
 
 namespace MyHotelService.HotelService.Models
 {
-    public class Hotel
+    [JsonObject(IsReference = true)]
+    public class Hotel : IHotel
     {
         [Key]
-        public int Id { get; set; }
+        [JsonProperty("id")]
+        public string _id { get; set; }
+        [JsonIgnore]
+        public ObjectId Id { get; set; }
 
         [Required]
         [StringLength(300)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("builtDateTime")]
         public DateTime BuiltDateTime { get; set; }
 
         [ForeignKey("Rooms")]
-        public Room Room { get; set; }
-        public Room[] Rooms { get; set; }
+        [JsonProperty("room")]
+        public IRoom Room { get; set; }
+        [JsonProperty("rooms")]
+        public IRoom[] Rooms { get; set; }
 
         public Hotel()
         {
 
         }
 
-        public Hotel(string name, DateTime builtDateTime, Room[] rooms)
+        public Hotel(string name, DateTime builtDateTime, IRoom[] rooms=null)
         {
             Name = name;
             BuiltDateTime = builtDateTime;
