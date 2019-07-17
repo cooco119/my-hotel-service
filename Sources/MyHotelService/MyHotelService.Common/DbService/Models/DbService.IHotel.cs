@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MongoDB.Bson;
 
-namespace MyHotelService.Common.HotelService.Models
+namespace MyHotelService.Common.DbService.Models
 {
     public interface IHotel
     {

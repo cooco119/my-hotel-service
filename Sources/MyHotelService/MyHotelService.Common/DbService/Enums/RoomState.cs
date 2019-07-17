@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyHotelService.Common.HotelService.Enums
+namespace MyHotelService.Common.DbService.Enums
 {
     public enum RoomState
     {

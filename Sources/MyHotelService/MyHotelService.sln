@@ -5,17 +5,13 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.DbService", "MyHotelService.DbService\MyHotelService.DbService.csproj", "{4AE2FF94-2C22-432F-9F7C-E3A19B19590D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.HotelService", "MyHotelService.HotelService\MyHotelService.HotelService.csproj", "{AFC1E76E-21D5-401B-AD15-22286FABD822}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.PaymentService", "MyHotelService.PaymentService\MyHotelService.PaymentService.csproj", "{3A9100A8-C439-4C1C-BDC3-90878033633E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.QueueService", "MyHotelService.QueueService\MyHotelService.QueueService.csproj", "{73891BBB-7E0C-486A-B4B5-F1F47E46A707}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.ReservationService", "MyHotelService.ReservationService\MyHotelService.ReservationService.csproj", "{02D4C111-4F43-4DA7-989F-AF98BD12994B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.UserService", "MyHotelService.UserService\MyHotelService.UserService.csproj", "{C0AE6078-91B1-495E-95D3-91EBA3B17197}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyHotelService.Common", "MyHotelService.Common\MyHotelService.Common.csproj", "{E048173D-6782-41D7-B645-7195151AE60A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHotelService.Common", "MyHotelService.Common\MyHotelService.Common.csproj", "{E048173D-6782-41D7-B645-7195151AE60A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +23,6 @@ Global
 		{4AE2FF94-2C22-432F-9F7C-E3A19B19590D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AE2FF94-2C22-432F-9F7C-E3A19B19590D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AE2FF94-2C22-432F-9F7C-E3A19B19590D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFC1E76E-21D5-401B-AD15-22286FABD822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFC1E76E-21D5-401B-AD15-22286FABD822}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFC1E76E-21D5-401B-AD15-22286FABD822}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFC1E76E-21D5-401B-AD15-22286FABD822}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A9100A8-C439-4C1C-BDC3-90878033633E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A9100A8-C439-4C1C-BDC3-90878033633E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9100A8-C439-4C1C-BDC3-90878033633E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,10 +35,6 @@ Global
 		{02D4C111-4F43-4DA7-989F-AF98BD12994B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02D4C111-4F43-4DA7-989F-AF98BD12994B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02D4C111-4F43-4DA7-989F-AF98BD12994B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0AE6078-91B1-495E-95D3-91EBA3B17197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0AE6078-91B1-495E-95D3-91EBA3B17197}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0AE6078-91B1-495E-95D3-91EBA3B17197}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0AE6078-91B1-495E-95D3-91EBA3B17197}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E048173D-6782-41D7-B645-7195151AE60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E048173D-6782-41D7-B645-7195151AE60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E048173D-6782-41D7-B645-7195151AE60A}.Release|Any CPU.ActiveCfg = Release|Any CPU

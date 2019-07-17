@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
-using MyHotelService.Common.HotelService.Models;
+using MyHotelService.Common.DbService.Models;
 using MyHotelService.Common.Utility;
 using Newtonsoft.Json;
 

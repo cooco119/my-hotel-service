@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyHotelService.Common.HotelService.Enums
+namespace MyHotelService.Common.DbService.Enums
 {
     public enum HttpRequestType
     {

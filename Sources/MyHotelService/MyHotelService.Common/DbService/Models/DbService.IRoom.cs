@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using MongoDB.Bson;
-using MyHotelService.Common.HotelService.Enums;
+using MyHotelService.Common.DbService.Enums;
 
-namespace MyHotelService.Common.HotelService.Models
+namespace MyHotelService.Common.DbService.Models
 {
     public interface IRoom
     {
@@ -16,5 +16,6 @@ namespace MyHotelService.Common.HotelService.Models
 
         RoomState Status { get; set; }
         bool AllowedSmoking { get; set; }
+        IUser Customer { get; set; }
     }
 }
