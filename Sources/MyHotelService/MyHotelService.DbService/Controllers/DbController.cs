@@ -15,7 +15,7 @@ namespace MyHotelService.DbService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DbController : ControllerBase, IDbController
+    public class DbController : ControllerBase
     {
         [HttpGet("Hotels/{name}")]
         public ActionResult<IHotel> GetHotel(string name)
@@ -37,15 +37,15 @@ namespace MyHotelService.DbService.Controllers
 
         // POST api/values
         [HttpPost("Hotels")]
-        public void PostHotel([FromBody] string value)
+        public void PostHotel([FromBody] Hotel value)
         {
-            MyDbManager.GetInstance().CreateInCollection("hotels", value);
+            MyDbManager.GetInstance().CreateInCollection<Hotel>("hotels", value as Hotel);
         }
 
         [HttpPost("Rooms")]
-        public void PostRooms([FromBody] string value)
+        public void PostRooms([FromBody] Room value)
         {
-            MyDbManager.GetInstance().CreateInCollection("hotels", value);
+            MyDbManager.GetInstance().CreateInCollection<Room>("rooms", value as Room);
         }
     }
 }

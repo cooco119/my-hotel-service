@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using MyHotelService.DbService.Models;
@@ -36,16 +37,12 @@ namespace MyHotelService.DbService.DbManager
             return result;
         }
 
-        public bool CreateInCollection(string collectionName, string data)
+        public bool CreateInCollection<T>(string collectionName, T data)
         {
             try
             {
                 var collection = _db.GetCollection<BsonDocument>(collectionName);
-                var document = new BsonDocument
-                {
-                    {"data", data},
-                    {"timestamp", DateTime.Now}
-                };
+                var document = data.ToBsonDocument();
                 collection.InsertOne(document);
                 return true;
             }

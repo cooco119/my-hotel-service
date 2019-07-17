@@ -3,12 +3,13 @@ using MongoDB.Bson;
 using MyHotelService.Common.HotelService.Enums;
 using MyHotelService.Common.HotelService.Models;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace MyHotelService.DbService.Models
 {
     public class Room : IRoom
     {
-        [BsonElement]
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
         public ObjectId Id { get; set; }
 
 
