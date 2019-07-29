@@ -13,8 +13,9 @@ namespace MyHotelService.DbService.Models
 {
     public class Reservation : IReservation
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement]
         public string ReservationCode { get; set; }
@@ -41,6 +42,11 @@ namespace MyHotelService.DbService.Models
 
         public Reservation(IReservation reservation)
         {
+            Id = ObjectId.GenerateNewId().ToString();
+            if (reservation == null)
+            {
+                return;
+            }
             ReservationCode = reservation.ReservationCode ?? "";
             User = new User(reservation.User);
             Hotel = new Hotel(reservation.Hotel);

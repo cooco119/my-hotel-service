@@ -8,7 +8,7 @@ namespace MyHotelService.Common.DbService.Models
 {
     public interface IRoom
     {
-        ObjectId Id { get; set; }
+        string Id { get; set; }
 
         int Number { get; set; }
 

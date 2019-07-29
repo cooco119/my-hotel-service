@@ -10,8 +10,9 @@ namespace MyHotelService.DbService.Models
 {
     public class Hotel : IHotel
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement]
         public string Name { get; set; }
@@ -33,6 +34,11 @@ namespace MyHotelService.DbService.Models
 
         public Hotel(IHotel hotel)
         {
+            Id = ObjectId.GenerateNewId().ToString();
+            if (hotel == null)
+            {
+                return;
+            }
             Name = hotel.Name ?? "";
             BuiltDateTime = hotel.BuiltDateTime != null ? hotel.BuiltDateTime : new DateTime();
             Room = new Room(hotel.Room);

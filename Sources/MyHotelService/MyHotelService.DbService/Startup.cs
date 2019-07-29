@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MyHotelService.DbService.DbManager;
 
 namespace MyHotelService.DbService
 {
@@ -17,6 +18,7 @@ namespace MyHotelService.DbService
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MyDbManager.GetInstance();
         }
 
         public IConfiguration Configuration { get; }

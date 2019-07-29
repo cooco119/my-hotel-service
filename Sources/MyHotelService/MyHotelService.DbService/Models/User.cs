@@ -13,8 +13,9 @@ namespace MyHotelService.DbService.Models
 {
     public class User : IUser
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement]
         public string Name { get; set; }
@@ -33,6 +34,11 @@ namespace MyHotelService.DbService.Models
 
         public User(IUser user)
         {
+            Id = ObjectId.GenerateNewId().ToString();
+            if (user == null)
+            {
+                return;
+            }
             Name = user.Name ?? "";
             Reservation = user.Reservation != null ? new Reservation(user.Reservation) : new Reservation();
             RegistrationDateTime = user.RegistrationDateTime != null ? user.RegistrationDateTime : new DateTime();

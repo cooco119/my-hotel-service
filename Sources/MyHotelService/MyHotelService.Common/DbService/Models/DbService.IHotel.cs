@@ -7,7 +7,7 @@ namespace MyHotelService.Common.DbService.Models
 {
     public interface IHotel
     {
-        ObjectId Id { get; set; }
+        string Id { get; set; }
 
         string Name { get; set; }
 

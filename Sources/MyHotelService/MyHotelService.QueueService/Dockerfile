@@ -1,19 +1,16 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
-WORKDIR /app
-EXPOSE 80
+# FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+# WORKDIR /app
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM microsoft/dotnet:2.2-sdk
 WORKDIR /src
-COPY ["QueueService/QueueService.csproj", "QueueService/"]
-RUN dotnet restore "QueueService/QueueService.csproj"
+COPY ["MyHotelService.Common/MyHotelService.Common.csproj", "MyHotelService.Common/"]
+RUN dotnet restore "MyHotelService.Common/MyHotelService.Common.csproj"
+COPY ["MyHotelService.QueueService/MyHotelService.QueueService.csproj", "MyHotelService.QueueService/"]
+RUN dotnet restore "MyHotelService.QueueService/MyHotelService.QueueService.csproj"
 COPY . .
-WORKDIR "/src/QueueService"
-RUN dotnet build "QueueService.csproj" -c Release -o /app
-
-FROM build AS publish
-RUN dotnet publish "QueueService.csproj" -c Release -o /app
-
-FROM base AS final
+WORKDIR "/src/MyHotelService.QueueService"
+RUN dotnet build "MyHotelService.QueueService.csproj" -c Release -o /app
+EXPOSE 5002
+RUN dotnet publish "MyHotelService.QueueService.csproj" -c Release -o /app
 WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "QueueService.dll"]
+ENTRYPOINT ["dotnet", "MyHotelService.QueueService.dll"]

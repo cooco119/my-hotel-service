@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using MyHotelService.DbService.Models;
+using Quartz;
+using Quartz.Impl;
 
 namespace MyHotelService.DbService.DbManager
 {
@@ -15,6 +20,7 @@ namespace MyHotelService.DbService.DbManager
         private MongoClient _client;
         private IMongoDatabase _db;
         private static MyDbManager _instance;
+        private static IScheduler _scheduler;
 
         public static MyDbManager GetInstance()
         {
@@ -88,6 +94,7 @@ namespace MyHotelService.DbService.DbManager
                 "mongodb://10.160.2.52:27017/test?w=majority"
             );
             _db = _client.GetDatabase("local");
+            SubscribeQueue();
         }
 
         public BsonDocument GetFromCollection<T>(string key, string value)
@@ -115,6 +122,53 @@ namespace MyHotelService.DbService.DbManager
             {
                 Console.WriteLine(e);
                 return false;
+            }
+        }
+
+        public async Task SubscribeQueue()
+        {
+            Console.WriteLine("Started Subscribing to queue");
+            try
+            {
+                NameValueCollection props = new NameValueCollection
+                {
+                    {"quartz.serializer.type", "binary"}
+                };
+                StdSchedulerFactory factory = new StdSchedulerFactory(props);
+                _scheduler = await factory.GetScheduler();
+
+                await _scheduler.Start();
+
+                IJobDetail job = JobBuilder.Create<PollingJob>()
+                    .WithIdentity("polling", "pollGroup")
+                    .Build();
+
+                ITrigger trigger = TriggerBuilder.Create()
+                    .WithIdentity("trigger1", "pollGroup")
+                    .StartNow()
+                    .WithSimpleSchedule(x => x
+                        .WithIntervalInSeconds(1)
+                        .RepeatForever())
+                    .Build();
+
+                await _scheduler.ScheduleJob(job, trigger);
+            }
+            catch (SchedulerException se)
+            {
+                Console.WriteLine(se);
+            }
+        }
+
+        public async Task UnsubscribeQueue()
+        {
+            try
+            {
+                await _scheduler.Shutdown();
+            }
+            catch (SchedulerException se)
+            {
+                Console.WriteLine(se);
+                throw se;
             }
         }
     }

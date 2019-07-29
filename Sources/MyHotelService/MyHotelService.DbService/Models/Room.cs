@@ -11,8 +11,9 @@ namespace MyHotelService.DbService.Models
 {
     public class Room : IRoom
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement]
         public int Number { get; set; }
@@ -36,6 +37,11 @@ namespace MyHotelService.DbService.Models
 
         public Room(IRoom room)
         {
+            Id = ObjectId.GenerateNewId().ToString();
+            if (room == null)
+            {
+                return;
+            }
             Number = room.Number;
             HotelName = room.HotelName ?? "";
             Status = room.Status;
