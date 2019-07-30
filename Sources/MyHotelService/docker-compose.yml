@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   dbservice:
-    image: my-queue-service.db-service:${TAG:-latest}
+    image: my-hotel-service.db-service:${TAG:-latest}
     build:
       context: .
       dockerfile: MyHotelService.DbService/Dockerfile
@@ -14,7 +14,7 @@ services:
       - redis
 
   queueservice:
-    image: my-queue-service.queue-service:${TAG:-latest}
+    image: my-hotel-service.queue-service:${TAG:-latest}
     build:
       context: .
       dockerfile: MyHotelService.QueueService/Dockerfile
