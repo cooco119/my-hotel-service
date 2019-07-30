@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-hotel-service.reservation-service
+spec:
+  containers:
+    - name: reservation-service
+      image: cooco119/my-hotel-service.reservation-service:latest
+      ports:
+        - containerPort: 5000

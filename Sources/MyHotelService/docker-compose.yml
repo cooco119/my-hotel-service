@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   dbservice:
-    image: my-hotel-service.db-service:${TAG:-latest}
+    image: cooco119/my-hotel-service.db-service:${TAG:-latest}
     build:
       context: .
       dockerfile: MyHotelService.DbService/Dockerfile
@@ -14,7 +14,7 @@ services:
       - redis
 
   queueservice:
-    image: my-hotel-service.queue-service:${TAG:-latest}
+    image: cooco119/my-hotel-service.queue-service:${TAG:-latest}
     build:
       context: .
       dockerfile: MyHotelService.QueueService/Dockerfile
@@ -24,7 +24,7 @@ services:
       - redis
 
   reservationservice:
-    image: my-hotel-service.reservation-service:${TAG:-latest}
+    image: cooco119/my-hotel-service.reservation-service:${TAG:-latest}
     build:
       context: .
       dockerfile: MyHotelService.ReservationService/Dockerfile

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-hotel-service.db-service
+spec:
+  containers:
+    - name: db-service
+      image: cooco119/my-hotel-service.db-service:latest
+      ports:
+        - containerPort: 5001

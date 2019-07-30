@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-hotel-service.queue-service
+spec:
+  containers:
+    - name: queue-service
+      image: cooco119/my-hotel-service.queue-service:latest
+      ports:
+        - containerPort: 5002
