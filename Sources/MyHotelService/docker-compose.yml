@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  dbservice:
+    image: my-queue-service.db-service:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: MyHotelService.DbService/Dockerfile
+    ports:
+      - "5001:5001"
+    depends_on:
+      - queueservice
+      - mongo
+      - redis
+
+  queueservice:
+    image: my-queue-service.queue-service:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: MyHotelService.QueueService/Dockerfile
+    ports:
+      - "5002:5002"
+    depends_on:
+      - redis
+
+  reservationservice:
+    image: my-hotel-service.reservation-service:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: MyHotelService.ReservationService/Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - dbservice
+      - queueservice
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6370:6379"
