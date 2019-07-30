@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MyHotelService.Common.DbService.Models;
 using MyHotelService.Common.Utility;
@@ -24,8 +25,8 @@ namespace MyHotelService.DbService.Models
         [JsonConverter(typeof(CustomJsonConverter<IRoom, Room>))]
         public IRoom Room { get; set; }
         [BsonElement]
-        [JsonConverter(typeof(CustomJsonConverter<IRoom, Room>))]
-        public IRoom[] Rooms { get; set; }
+        [JsonConverter(typeof(CustomJsonConverter<List<IRoom>, List<Room>>))]
+        public List<IRoom> Rooms { get; set; }
 
         public Hotel()
         {
@@ -42,10 +43,10 @@ namespace MyHotelService.DbService.Models
             Name = hotel.Name ?? "";
             BuiltDateTime = hotel.BuiltDateTime != null ? hotel.BuiltDateTime : new DateTime();
             Room = new Room(hotel.Room);
-            Rooms = new[] { Room };
+            Rooms = new List<IRoom> { Room };
         }
 
-        public Hotel(string name, DateTime builtDateTime, IRoom[] rooms=null)
+        public Hotel(string name, DateTime builtDateTime, List<IRoom> rooms =null)
         {
             Name = name;
             BuiltDateTime = builtDateTime;

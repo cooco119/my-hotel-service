@@ -35,20 +35,32 @@ namespace MyHotelService.ReservationService.Models
         [BsonElement]
         public DateTime ReservationDateTime { get; set; }
 
+        public Reservation GetSerializable()
+        {
+            var result = new Reservation();
+            result.ReservationCode = ReservationCode;
+            result.User = User != null ? ((User) User).GetSerializable() : null;
+            result.Hotel = Hotel != null ? ((Hotel) Hotel).GetSerializable() : null;
+            result.Room = Room != null ? ((Room) Room).GetSerializable() : null;
+            result.ReservationDateTime = ReservationDateTime;
+
+            return result;
+        }
+
         public Reservation()
         {
 
         }
 
-        public Reservation(IUser user, IHotel hotel, IRoom room)
+        public Reservation(User user, Hotel hotel, Room room)
         {
             Random random = new Random();
             string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
             Id = ObjectId.GenerateNewId().ToString();
             ReservationCode = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
-            User = new User(user);
-            Hotel = new Hotel(hotel);
-            Room = new Room(room);
+            User = user;
+            Hotel = hotel;
+            Room = room;
             ReservationDateTime = DateTime.Now;
         }
 

@@ -55,7 +55,7 @@ namespace MyHotelService.DbService.DbManager
             else if (typeof(T) == typeof(Room))
             {
                 key = "Number";
-                valueInt = (data as Room).Number;
+                valueString = (data as Room).Number;
             }
             else if (typeof(T) == typeof(User))
             {
@@ -94,6 +94,10 @@ namespace MyHotelService.DbService.DbManager
                 "mongodb://10.160.2.52:27017/test?w=majority"
             );
             _db = _client.GetDatabase("local");
+            BsonClassMap.RegisterClassMap<User>();
+            BsonClassMap.RegisterClassMap<Hotel>();
+            BsonClassMap.RegisterClassMap<Reservation>();
+            BsonClassMap.RegisterClassMap<Room>();
             SubscribeQueue();
         }
 

@@ -16,7 +16,7 @@ namespace MyHotelService.ReservationService.Models
         public string Id { get; set; }
 
         [BsonElement]
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         [BsonElement]
         public string HotelName { get; set; }
@@ -29,6 +29,18 @@ namespace MyHotelService.ReservationService.Models
         [BsonElement]
         [JsonConverter(typeof(CustomJsonConverter<IUser, User>))]
         public IUser Customer { get; set; }
+
+        public Room GetSerializable()
+        {
+            var result = new Room();
+            result.Number = Number;
+            result.HotelName = HotelName;
+            result.Status = Status;
+            result.AllowedSmoking = result.AllowedSmoking;
+            result.Customer = Customer != null ? ((User) Customer).GetSerializable() : null;
+
+            return result;
+        }
 
         public Room()
         {
@@ -49,7 +61,7 @@ namespace MyHotelService.ReservationService.Models
             Customer = new User(room.Customer);
         }
 
-        public Room(int number, string hotelName, RoomState status, bool allowedSmoking)
+        public Room(string number, string hotelName, RoomState status, bool allowedSmoking)
         {
             Number = number;
             HotelName = hotelName;

@@ -27,6 +27,16 @@ namespace MyHotelService.ReservationService.Models
         [BsonElement]
         public DateTime RegistrationDateTime { get; set; }
 
+        public User GetSerializable()
+        {
+            var result = new User();
+            result.Name = Name;
+            result.Reservation = Reservation != null ? ((Reservation) Reservation).GetSerializable() : null;
+            result.RegistrationDateTime = RegistrationDateTime;
+
+            return result;
+        }
+
         public User()
         {
 

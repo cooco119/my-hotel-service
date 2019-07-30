@@ -14,6 +14,6 @@ namespace MyHotelService.Common.DbService.Models
         DateTime BuiltDateTime { get; set; }
 
         IRoom Room { get; set; }
-        IRoom[] Rooms { get; set; }
+        List<IRoom> Rooms { get; set; }
     }
 }

@@ -73,7 +73,7 @@ namespace MyHotelService.QueueService.QueueManager
             }
             catch
             {
-                throw new Exception("No Corresponding Queue");
+                throw new Exception("No Corresponding Queue: " + key.ToString());
             }
         }
 

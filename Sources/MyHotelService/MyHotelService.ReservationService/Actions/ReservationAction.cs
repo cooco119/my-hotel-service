@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using MyHotelService.Common.QueueService;
 using MyHotelService.Common.QueueService.Enum;
@@ -27,7 +28,8 @@ namespace MyHotelService.ReservationService.Actions
             {
                 var client = new HttpClient();
                 var targetUrl = QueueInfo.Url + "/publish/" + QueueInfo.QueueName;
-                var content = new StringContent(JsonConvert.SerializeObject(queueEntry));
+                var stringContent = JsonConvert.SerializeObject(queueEntry);
+                var content = new StringContent(stringContent, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(targetUrl, content);
                 response.EnsureSuccessStatusCode();
 
@@ -50,7 +52,7 @@ namespace MyHotelService.ReservationService.Actions
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<User>(responseBody);
+                return JsonConvert.DeserializeObject<User>(responseBody).GetSerializable();
             }
             catch (HttpRequestException e)
             {
@@ -69,7 +71,7 @@ namespace MyHotelService.ReservationService.Actions
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<Hotel>(responseBody);
+                return JsonConvert.DeserializeObject<Hotel>(responseBody).GetSerializable();
             }
             catch (HttpRequestException e)
             {
@@ -88,7 +90,7 @@ namespace MyHotelService.ReservationService.Actions
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<Room>(responseBody);
+                return JsonConvert.DeserializeObject<Room>(responseBody).GetSerializable();
             }
             catch (HttpRequestException e)
             {

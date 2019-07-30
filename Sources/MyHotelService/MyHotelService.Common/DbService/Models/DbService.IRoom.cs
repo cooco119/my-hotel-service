@@ -10,7 +10,7 @@ namespace MyHotelService.Common.DbService.Models
     {
         string Id { get; set; }
 
-        int Number { get; set; }
+        string Number { get; set; }
 
         string HotelName { get; set; }
 

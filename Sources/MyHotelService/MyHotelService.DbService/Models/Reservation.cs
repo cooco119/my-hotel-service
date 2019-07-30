@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace MyHotelService.DbService.Models
 {
+    [BsonDiscriminator("Reservation")]
     public class Reservation : IReservation
     {
         [BsonId(IdGenerator = typeof(ObjectIdGenerator))]

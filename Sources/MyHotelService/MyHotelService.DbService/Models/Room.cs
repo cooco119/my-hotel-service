@@ -16,7 +16,7 @@ namespace MyHotelService.DbService.Models
         public string Id { get; set; }
 
         [BsonElement]
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         [BsonElement]
         public string HotelName { get; set; }
@@ -49,7 +49,7 @@ namespace MyHotelService.DbService.Models
             Customer = new User(room.Customer);
         }
 
-        public Room(int number, string hotelName, RoomState status, bool allowedSmoking)
+        public Room(string number, string hotelName, RoomState status, bool allowedSmoking)
         {
             Number = number;
             HotelName = hotelName;

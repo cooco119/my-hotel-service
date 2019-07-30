@@ -46,7 +46,7 @@ namespace MyHotelService.QueueService.Controllers
         }
 
         [HttpPost("publish/{name}")]
-        public void Post([FromBody] QueueEntry value, string name)
+        public void PublishQueue([FromBody] QueueEntry value, string name)
         {
             var qm = MyQueueManager<IQueueEntry>.GetInstance();
             var key = qm.TryInitNewQueue(name);
