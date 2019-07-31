@@ -16,14 +16,14 @@ namespace MyHotelService.QueueService.QueueManager
         public RedisQueue(string name)
         {
             _size = 0;
-            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("10.160.2.52:6370");
+            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("redis:6379");
             _db = redisConnectionMultiplexer.GetDatabase();
             _listKey = name;
         }
         public RedisQueue(string name, long size)
         {
             _size = size;
-            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("10.160.2.52:6370");
+            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("redis:6379");
             _db = redisConnectionMultiplexer.GetDatabase();
             _listKey = name;
         }

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: my-hotel-service
+  labels:
+    app: ingress
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: reservation-service
+          servicePort: 5000

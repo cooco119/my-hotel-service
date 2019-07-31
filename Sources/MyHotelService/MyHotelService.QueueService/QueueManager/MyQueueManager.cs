@@ -36,7 +36,7 @@ namespace MyHotelService.QueueService.QueueManager
         public MyQueueManager()
         {
             _queues = new Dictionary<RedisKey, RedisQueue<T>>();
-            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("10.160.2.52:6379");
+            var redisConnectionMultiplexer = ConnectionMultiplexer.Connect("redis:6379");
             _db = redisConnectionMultiplexer.GetDatabase();
             FetchDb();
         }

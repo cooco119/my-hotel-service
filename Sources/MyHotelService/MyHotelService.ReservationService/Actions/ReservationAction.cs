@@ -13,7 +13,7 @@ namespace MyHotelService.ReservationService.Actions
 {
     public class ReservationAction
     {
-        private static string _dbUrl = "http://10.160.2.52:5001/api/Db";
+        private static string _dbUrl = "http://db-service:5001/api/Db";
 
         public static async Task<bool> Reserve(ReservationRequest request)
         {

@@ -91,7 +91,7 @@ namespace MyHotelService.DbService.DbManager
         public MyDbManager()
         {
             _client = new MongoClient(
-                "mongodb://10.160.2.52:27017/test?w=majority"
+                "mongodb://mongo:27017/test?w=majority"
             );
             _db = _client.GetDatabase("local");
             BsonClassMap.RegisterClassMap<User>();
