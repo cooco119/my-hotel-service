@@ -43,19 +43,15 @@ namespace MyHotelService.QueueService.QueueManager
 
         public RedisKey TryInitNewQueue(string name)
         {
-            try
+            if (_queues.ContainsKey(name))
             {
-                var existingQueue = _queues[name];
                 return name;
             }
-            catch
-            {
-                var newQueue = new RedisQueue<T>(name);
-                _queues.Add(name, newQueue);
-                _db.ListLeftPush(_redisKeyStoreKey, name);
+            var newQueue = new RedisQueue<T>(name);
+            _queues.Add(name, newQueue);
+            _db.ListLeftPush(_redisKeyStoreKey, name);
 
-                return name;
-            }
+            return name;
         }
 
         public void PublishToQueue(RedisKey key, T item)
